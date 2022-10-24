@@ -12,6 +12,7 @@
         <script type = 'text/javascript'>
             const key = 'ff9ba92f56ed4ed0b1edf0bc8a23b311'
             var loc
+            var add
 
             function getLoc() {
                 function f(pos) {loc = pos}
@@ -19,11 +20,11 @@
             }
 
             function getAddress() {
-                return fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${loc.latitude}&lon=${loc.longitude}&apiKey=${key}`)
+                fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${loc.latitude}&lon=${loc.longitude}&apiKey=${key}`)
                 .then(response => response.json())
                 .then(result => {
                 if (result.features.length) {
-                    console.log(result.features[0].properties.formatted);
+                    add = result.features[0].properties.formatted;
                 } else {
                     console.log("No address found");
                 }
@@ -32,7 +33,7 @@
 
             function get() {
                 getLoc()
-                window.open(`https://www.google.com/maps/dir/?api=1&origin=${loc}&destination=${encodeURIComponent(getAddress())}`)
+                window.open(`https://www.google.com/maps/dir/?api=1&origin=${loc}&destination=${encodeURIComponent(add)}`)
             }
         </script>
     </head>
