@@ -33,7 +33,7 @@
 
             function get() {
                 getLoc()
-                window.open(`https://www.google.com/maps/dir/?api=1&origin=${loc}&destination=${encodeURIComponent(add)}`)
+                window.open(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(toString(loc.latitude) + " " + toString(loc.longitude))}&destination=${encodeURIComponent(add)}`)
             }
         </script>
     </head>
