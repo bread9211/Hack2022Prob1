@@ -11,20 +11,34 @@
         
         <script type = 'text/javascript'>
             const key = 'ff9ba92f56ed4ed0b1edf0bc8a23b311'
+            var loc
 
             function getLoc() {
-                function f(pos) {alert(pos.coords); return pos.coords}
+                function f(pos) {loc = pos}
                 navigator.geolocation.getCurrentPosition(f)
             }
 
+            function getAddress() {
+                return fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${loc.latitude}&lon=${loc.longitude}&apiKey=${key}`)
+                .then(response => response.json())
+                .then(result => {
+                if (result.features.length) {
+                    console.log(result.features[0].properties.formatted);
+                } else {
+                    console.log("No address found");
+                }
+                })
+            }
+
             function get() {
-                
+                getLoc()
+                window.open(`https://www.google.com/maps/dir/?api=1&origin=${loc}&destination=${encodeURIComponent(getAddress())}`)
             }
         </script>
     </head>
 
     <body>
-        <input type = "button" onClick = "getLoc()" value = "Search" /><br/>
+        <input type = "button" onClick = "get()" value = "Search" /><br/>
         <div id = "output"></div>
     </body>
 </html>
