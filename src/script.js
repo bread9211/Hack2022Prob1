@@ -1,4 +1,4 @@
-const BingMapsKey = 'ff9ba92f56ed4ed0b1edf0bc8a23b311'
+const key = 'ff9ba92f56ed4ed0b1edf0bc8a23b311'
 
 function getLoc() {
     var location
