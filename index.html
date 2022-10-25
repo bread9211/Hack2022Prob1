@@ -15,6 +15,7 @@
             var address
             var destAddress
             var rcLocations
+            var resultLocation
 
             function getLoc() {
                 function f(pos) {location = pos}
@@ -48,7 +49,7 @@
             function get() {
                 getLoc()
                 getAddress()
-                window.open(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(add)}&destination=${encodeURIComponent(add)}`)
+                window.open(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(address)}&destination=${encodeURIComponent(resultLocation)}`)
             }
         </script>
     </head>
