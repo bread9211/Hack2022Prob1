@@ -11,8 +11,10 @@
         
         <script type = 'text/javascript'>
             const key = 'ff9ba92f56ed4ed0b1edf0bc8a23b311'
-            var loc
-            var add
+            var location
+            var address
+            var destAddress
+            var rcLocations
 
             function getLoc() {
                 function f(pos) {loc = pos}
@@ -23,17 +25,29 @@
                 fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${loc.latitude}&lon=${loc.longitude}&apiKey=${key}`)
                 .then(response => response.json())
                 .then(result => {
-                if (result.features.length) {
-                    add = result.features[0].properties.formatted;
-                } else {
-                    console.log("No address found");
-                }
+                    if (result.features.length) {
+                        add = result.features[0].properties.formatted;
+                    } else {
+                        console.log("No address found");
+                    }
+                })
+            }
+
+            function getLocations() {
+                fetch("http://app.redcross.org/nss-app/pages/mapServicesList.jsp?action=list")
+                .then(response => response.json())
+                .then(result => {
+                    if (result.features.length) {
+                        rcLocations = result.features[0].properties.formatted;
+                    } else {
+                        console.log("No address found");
+                    }
                 })
             }
 
             function get() {
                 getLoc()
-                window.open(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(toString(loc.latitude) + " " + toString(loc.longitude))}&destination=${encodeURIComponent(add)}`)
+                window.open(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(add)}&destination=${encodeURIComponent(add)}`)
             }
         </script>
     </head>
