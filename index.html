@@ -11,48 +11,60 @@
         
         <script type = 'text/javascript'>
             const key = 'ff9ba92f56ed4ed0b1edf0bc8a23b311'
-            var location
+            var position
             var address
             var destAddress
-            var rcLocations
-            var resultLocation
 
             function getLoc() {
                 navigator.geolocation.getCurrentPosition((pos) => {
-                    console.log(pos)
-                    location = pos.coords
+                    position = pos.coords
                     getAddress();
                 })
             }
 
             function getAddress() {
-                console.log(location, location.coords, location.latitude)
-                fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${location.latitude}&lon=${location.longitude}&apiKey=${key}`)
+                fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${position.latitude}&lon=${position.longitude}&apiKey=${key}`)
                 .then(response => response.json())
                 .then(result => {
                     if (result.features.length) {
-                        add = result.features[0].properties.formatted;
+                        console.log(result.features[0].properties.postcode)
+                        getLocations(result.features[0].properties.postcode)
+                        address = result.features[0].properties.formatted;
+                        console.log(address)
                     } else {
                         console.log("No address found");
                     }
                 })
             }
 
-            function getLocations() {
-                fetch("http://app.redcross.org/nss-app/pages/mapServicesList.jsp?action=list")
+            function getLocations(zipCode) {
+                fetch("https://www.redcross.org/api/lookup/v1/region-mappings/" + zipCode +"?type\x3dRCO")
                 .then(response => response.json())
                 .then(result => {
-                    if (result.features.length) {
-                        rcLocations = result.features[0].properties.formatted;
+                    if (result[0].regionCode) {
+                        fetch("https://www.redcross.org/bin/location-search.regionCode" + toString(result[0].regionCode) +"\x3d.json")
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.regionStreet) {
+                                destAddress = `${result.regionStreet}, ${result.regionCity}, ${result.regionState} ${result.regionZip}`
+                                console.log(destAddress)
+                            } else {
+                                console.log("No address found")
+                            }
+                        })
+                        redirect()
                     } else {
                         console.log("No address found");
                     }   
                 })
             }
 
+            function redirect() {
+                window.open(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(address)}&destination=${encodeURIComponent(destAddress)}`)
+            }
+
             function get() {
                 getLoc()
-                // window.open(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(address)}&destination=${encodeURIComponent(resultLocation)}`
             }
         </script>
     </head>
