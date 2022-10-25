@@ -38,7 +38,7 @@
             }
 
             function getLocations(zipCode) {
-                fetch("https://www.redcross.org/api/lookup/v1/region-mappings/" + zipCode +"?type\x3dRCO")
+                fetch("https://www.redcross.org/api/lookup/v1/region-mappings/" + zipCode +"?type\x3dRCO", { mode: "no-cors" })
                 .then(response => response.json())
                 .then(result => {
                     if (result[0].regionCode) {
