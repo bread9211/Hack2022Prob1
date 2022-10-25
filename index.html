@@ -7,7 +7,7 @@
         <meta name = "viewport" content = "width = device-width, initial-scale = 1">
         <link rel = "stylesheet" href = "src/style.css">
         
-        <script type = 'text/javascript' src = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+        <script type = 'text/javascript' src = "jq.js"></script>
         
         <script type = 'text/javascript'>
             const key = 'ff9ba92f56ed4ed0b1edf0bc8a23b311'
@@ -21,6 +21,7 @@
                 navigator.geolocation.getCurrentPosition((pos) => {
                     console.log(pos)
                     location = pos.coords
+                    getAddress();
                 })
             }
 
@@ -51,7 +52,6 @@
 
             function get() {
                 getLoc()
-                getAddress()
                 // window.open(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(address)}&destination=${encodeURIComponent(resultLocation)}`
             }
         </script>
