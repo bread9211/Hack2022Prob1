@@ -23,7 +23,7 @@
             }
 
             function getAddress() {
-                console.log(location, location.coords, location.coords.latitude)
+                console.log(location, location.coords, location.latitude)
                 fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${location.coords.latitude}&lon=${location.coords.longitude}&apiKey=${key}`)
                 .then(response => response.json())
                 .then(result => {
