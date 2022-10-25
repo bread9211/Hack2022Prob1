@@ -17,12 +17,12 @@
             var rcLocations
 
             function getLoc() {
-                function f(pos) {loc = pos}
+                function f(pos) {location = pos}
                 navigator.geolocation.getCurrentPosition(f)
             }
 
             function getAddress() {
-                fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${loc.latitude}&lon=${loc.longitude}&apiKey=${key}`)
+                fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${location.latitude}&lon=${location.longitude}&apiKey=${key}`)
                 .then(response => response.json())
                 .then(result => {
                     if (result.features.length) {
