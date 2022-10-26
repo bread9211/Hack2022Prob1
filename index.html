@@ -27,10 +27,8 @@
                 .then(response => response.json())
                 .then(result => {
                     if (result.features.length) {
-                        console.log(result.features[0].properties.postcode)
                         getLocations(result.features[0].properties.postcode)
                         address = result.features[0].properties.formatted;
-                        console.log(address)
                     } else {
                         console.log("No address found");
                     }
@@ -38,12 +36,14 @@
             }
 
             function getLocations(zipCode) {
-                fetch("https://www.redcross.org/api/lookup/v1/region-mappings/" + zipCode +"?type\x3dRCO", { mode: "no-cors" })
-                .then(response => response.json())
+                console.log("https://www.redcross.org/api/lookup/v1/region-mappings/" + zipCode +"?type\x3dRCO")
+                fetch("https://www.redcross.org/api/lookup/v1/region-mappings/" + zipCode +"?type\x3dRCO")
+                .then(response => {console.log(response.headers); return response.json()})
                 .then(result => {
+                    console.log(result)
                     if (result[0].regionCode) {
                         fetch("https://www.redcross.org/bin/location-search.regionCode" + toString(result[0].regionCode) +"\x3d.json")
-                        .then(response => response.json())
+                        .then(response => {console.log("https://www.redcross.org/bin/location-search.regionCode" + toString(result[0].regionCode) +"\x3d.json", response); return response.json()})
                         .then(result => {
                             if (result.regionStreet) {
                                 destAddress = `${result.regionStreet}, ${result.regionCity}, ${result.regionState} ${result.regionZip}`
