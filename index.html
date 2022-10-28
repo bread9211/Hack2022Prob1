@@ -5,13 +5,19 @@
         <meta charset = "utf-8">
         <meta name = "description" content = "Red Cross">
         <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+        <!-- Below line is copied from a previous project -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel = "stylesheet" href = "src/style.css">
     </head>
 
     <body>
-        <h3>Click the button below to find nearest Red Cross locations in CA</h3>
-        <input type = "button" id = "search" value = "Search" /><br/><br>
-
+        <div class= "image">
+            <img src="src/transRedCross.png" alt="red cross" id="redCross">
+        </div>
+        <div class = "find">
+            <h3>Click the button below to find nearest Red Cross locations in CA</h3>
+            <input type = "button"  class = "btn btn-danger" id = "search" value = "Search" /><br/><br>
+        </div>
         <script type = 'text/javascript' src = "src/script.js"></script>
     </body>
 </html>

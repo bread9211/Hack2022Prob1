@@ -2,3 +2,22 @@ iframe {
     width:75%;
     height:75%;
 }
+
+body {
+    background-image: url("whiteToRedGradient.jpeg");
+    font-size: 125%;
+}
+
+#search {
+    margin: 30px;
+    padding-top: 10px;
+    font-size: 150%;
+}
+
+.find {
+    margin-top: 30px;    
+    color: rgb(255, 0, 0);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    
+}
